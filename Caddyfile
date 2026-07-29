@@ -1,14 +1,3 @@
-{
-    default_sni {$PUBLIC_IP}
-}
-
-https://{$PUBLIC_IP} {
-    tls {
-        issuer acme {
-            dir https://acme-v02.api.letsencrypt.org/directory
-            profile shortlived
-        }
-    }
-
+botamin-91-218-112-192.nip.io {
     reverse_proxy api:8000
 }

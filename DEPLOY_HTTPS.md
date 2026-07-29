@@ -10,15 +10,13 @@
 
 ```env
 BOTAMIN_API_KEY=replace_with_secure_api_key
-PUBLIC_IP=91.218.112.192
 ```
 
-Если `PUBLIC_IP` не указан, Compose использует `91.218.112.192`.
 
 ## Обновление на VPS
 
 ```bash
-cd /opt/botamin-api
+cd /opt/botamin-api-git
 git pull --ff-only
 docker compose config
 docker compose pull caddy
@@ -46,13 +44,13 @@ sudo ufw delete allow 8000/tcp
 ## Проверка
 
 ```bash
-curl -v https://91.218.112.192/health
+curl -v https://botamin-91-218-112-192.nip.io/health
 ```
 
 Проверка защищённого endpoint:
 
 ```bash
-curl -X POST https://91.218.112.192/available-slots \
+curl -X POST https://botamin-91-218-112-192.nip.io/available-slots \
   -H "Content-Type: application/json" \
   -H "X-API-Key: YOUR_API_KEY" \
   -d '{"date_mode":"nearest","period":"any"}'
@@ -60,8 +58,8 @@ curl -X POST https://91.218.112.192/available-slots \
 
 ## ElevenLabs
 
-- `POST https://91.218.112.192/available-slots`
-- `POST https://91.218.112.192/book-meeting`
+- `POST https://botamin-91-218-112-192.nip.io/available-slots`
+- `POST https://botamin-91-218-112-192.nip.io/book-meeting`
 
 Порт `8000` в URL ElevenLabs не указывается. В оба инструмента добавляется
 секретный заголовок `X-API-Key`.
@@ -76,5 +74,5 @@ sudo ss -lntp | grep -E ':80|:443'
 ```
 
 Сертификаты Caddy хранятся в постоянном volume `botamin-caddy-data`, поэтому
-не теряются при пересоздании контейнера. IP-сертификат использует ACME profile
-`shortlived` и должен автоматически продлеваться Caddy.
+не теряются при пересоздании контейнера. Caddy автоматически получает и
+продлевает сертификат для hostname botamin-91-218-112-192.nip.io.
