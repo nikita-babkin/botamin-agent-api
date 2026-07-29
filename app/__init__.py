@@ -1,0 +1,1 @@
+"""Botamin booking API package."""

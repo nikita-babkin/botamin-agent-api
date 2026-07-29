@@ -1,0 +1,19 @@
+[Unit]
+Description=Botamin FastAPI Booking API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=deploy
+Group=deploy
+WorkingDirectory=/opt/botamin-api
+EnvironmentFile=/etc/botamin-api.env
+ExecStart=/opt/botamin-api/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
