@@ -1,0 +1,18 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: botamin-api:latest
+    container_name: botamin-api
+    restart: unless-stopped
+    environment:
+      BOTAMIN_API_KEY: ${BOTAMIN_API_KEY:?BOTAMIN_API_KEY must be set}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - botamin-data:/app/data
+
+volumes:
+  botamin-data:
+    name: botamin-api-data
