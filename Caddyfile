@@ -1,3 +1,7 @@
+{
+    default_sni 91.218.112.192
+}
+
 https://{$PUBLIC_IP} {
     tls {
         issuer acme {
