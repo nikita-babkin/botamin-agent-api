@@ -1,5 +1,7 @@
 # Botamin Booking API
 
+> Актуальный production-деплой использует HTTPS через Caddy. См. DEPLOY_HTTPS.md.
+
 API календарной логики для голосового агента Botamin.
 
 ## Возможности

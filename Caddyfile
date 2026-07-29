@@ -1,5 +1,5 @@
 {
-    default_sni 91.218.112.192
+    default_sni {$PUBLIC_IP}
 }
 
 https://{$PUBLIC_IP} {
