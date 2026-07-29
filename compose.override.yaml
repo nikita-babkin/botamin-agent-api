@@ -1,0 +1,26 @@
+services:
+  api:
+    ports: !reset []
+
+  caddy:
+    image: caddy:2.10-alpine
+    container_name: botamin-caddy
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      PUBLIC_IP: ${PUBLIC_IP:-91.218.112.192}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  caddy-data:
+    name: botamin-caddy-data
+  caddy-config:
+    name: botamin-caddy-config
