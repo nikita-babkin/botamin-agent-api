@@ -52,6 +52,11 @@ sudo systemctl reload nginx
 curl https://botamin-151-243-3-142.nip.io/health
 ```
 
+Проверка всех публичных endpoint после деплоя:
+
+    sudo ./deploy/verify-production.sh
+
+
 ## Автопродление
 
 ```bash
@@ -59,12 +64,10 @@ sudo certbot renew --dry-run
 sudo systemctl enable --now certbot.timer
 ```
 
-Deploy hook `/etc/letsencrypt/renewal-hooks/deploy/reload-nginx`:
+Установите deploy hook для перезагрузки Nginx после продления:
 
-```sh
-#!/bin/sh
-systemctl reload nginx
-```
+    sudo install -m 0755 deploy/nginx/reload-nginx.sh /etc/letsencrypt/renewal-hooks/deploy/reload-nginx
+
 
 ## Обновление приложения
 
