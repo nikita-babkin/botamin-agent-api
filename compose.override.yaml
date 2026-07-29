@@ -11,6 +11,9 @@ services:
         condition: service_healthy
     environment:
       PUBLIC_IP: ${PUBLIC_IP:-91.218.112.192}
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     ports:
       - "80:80"
       - "443:443"
